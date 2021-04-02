@@ -1,9 +1,9 @@
 <?php
     session_start();
     
-    if(isset($_SESSION["admin"])){
+    if(isset($_SESSION["doctor"])){
         session_unset();
         session_destroy();
     }
-    header("Location:../admin_profile.html");
+    header("Location:../index.html");
 ?>

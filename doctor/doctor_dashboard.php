@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <title>SCREEN PAGE</title>
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              Profile
+              <?php echo $_SESSION["doctor"]; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right text-right rounded-0" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Change Password</a>
@@ -53,17 +54,13 @@
       <div class="row justify-content-center">
         <div class="col-md-6 text-center">
           <ul class="list-unstyled">
-            <li class="m-2"><input class"btn" type="button" name="" value="Admin"></li>
+            <li class="m-2"><input class"btn btn-light" type="button" name="" value="Patient_info"></li>
 
-            <li class="m-2"><input class"btn" type="button" name="" value="Doctor"></li>
+            <li class="m-2"><input class"btn btn-light" type="button" name="" value="Appointment"></li>
 
-            <li class="m-2"><input class"btn" type="button" name="" value="Patient_info"></li>
+            <li class="m-2"><input class"btn btn-light" type="button" name="" value="Rehabitalitation"></li>
 
-            <li class="m-2"><input class"btn" type="button" name="" value="Appointment"></li>
-
-            <li class="m-2"><input class"btn" type="button" name="" value="Rehabitalitation"></li>
-
-            <li class="m-2"><input class"btn" type="button" name="" value="About"></li>
+            <li class="m-2"><input class"btn btn-light" type="button" name="" value="About"></li>
           </ul>
         </div>
       </div>
