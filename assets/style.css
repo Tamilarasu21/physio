@@ -21,3 +21,6 @@
   -ms-transform: rotate(-44deg);
   transform: rotate(-44deg);
 }
+.text-decoration-none{
+  text-decoration:none !important;
+}
