@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Doctor</title>
+    <title>Add Admin</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Font awesome CSS dont change -->
@@ -44,26 +44,21 @@
             <div class="col-md-5 text-center">
                 <div class="card">
                     <div class="card-header bg-danger text-light">
-                        <h5 class="text-center">Add Doctor</h5>
+                        <h5 class="text-center">Add Admin</h5>
                     </div>
                     <div class="card-body">
-                        <form action="main/add_doctor.php" method="POST">
-                            <div class="form-group"><input type="text" name="dname" class="form-control"
-                                    placeholder="Doctor Name"></div>
-                            <div class="form-group"><input type="email" name="demail" class="form-control"
-                                    placeholder="Doctor Email"></div>
-                            <div class="form-group"><select name="mode" id="mode" class="form-control">
-                                <option selected hidden disabled>Doctor Mode</option>
-                                <option value="hospital">Hospital</option>
-                                <option value="home">Home</option>
-                            </select></div>
-                            <div class="form-group"><input type="password" name="dpass" class="form-control"
+                        <form action="main/add_admin.php" method="POST">
+                            <div class="form-group"><input type="text" name="aname" class="form-control"
+                                    placeholder="Admin Name"></div>
+                            <div class="form-group"><input type="email" name="aemail" class="form-control"
+                                    placeholder="Admin Email"></div>
+                            <div class="form-group"><input type="password" name="apass" class="form-control"
                                     placeholder="Password"></div>
-                            <div class="form-group"><input type="password" name="dcpass" class="form-control"
+                            <div class="form-group"><input type="password" name="acpass" class="form-control"
                                 placeholder="Confirm Password"></div>
                     </div>
                     <div class="card-footer">
-                        <div class="text-center"><input type="submit" value="Add Doctor" name="dadd"
+                        <div class="text-center"><input type="submit" value="Add Admin" name="aadd"
                                 class="btn btn-danger"></div>
                         </form>
                     </div>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("../config.php");
-if(!isset($_SESSION["admin"])) {
+if (!isset($_SESSION["admin"])) {
     header("Location:index.html");
 }
 ?>
@@ -21,7 +21,7 @@ if(!isset($_SESSION["admin"])) {
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-            <a class="navbar-brand" href="#">PHYSIO</a>
+            <a class="navbar-brand" href="#"><img src="../assets/physio.jpg" alt="logo" width="35" height="35" border="1" style="left: 0" class="img-circle" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +42,78 @@ if(!isset($_SESSION["admin"])) {
         </nav>
     </header>
     <main>
-        <div class="container mt-4">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Hospital</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Home</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <h3 class="text-center text-danger">Hospital Appoinments</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Patient Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Phone</th>
+                                        <th>Rehabitalization</th>
+                                        <th>Doctor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "select * from appoinment where mode='hospital' order by id desc";
+                                    $run = mysqli_query($con, $sql);
+                                    $f = 1;
+                                    foreach ($run as $app) {
+                                        $rehab = $app["rehab"] == 0 ? "Yes" : "No";
+                                        echo '<tr><td>' . $f . '</td><td>' . $app["pname"] . '</td><td>' . date("d-m-Y", strtotime($app["date"])) . '</td><td>' . date("g:iA", strtotime($app["time"])) . '</td><td>' . $app["phone"] . '</td><td>' . $rehab . '</td><td>' . $app["doctor"] . '</td></tr>';
+                                        $f++;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <h3 class="text-center text-danger">Home Appoinments</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Patient Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Phone</th>
+                                        <th>Rehabitalization</th>
+                                        <th>Doctor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "select * from appoinment where mode='home' order by id desc";
+                                    $run = mysqli_query($con, $sql);
+                                    $i = 1;
+                                    foreach ($run as $app) {
+                                        $rehab = $app["rehab"] == 0 ? "Yes" : "No";
+                                        echo '<tr><td>' . $i . '</td><td>' . $app["pname"] . '</td><td>' . date("d-m-Y", strtotime($app["date"])) . '</td><td>' . date("g:iA", strtotime($app["time"])) . '</td><td>' . $app["phone"] . '</td><td>' . $rehab . '</td><td>' . $app["doctor"] . '</td></tr>';
+                                        $i++;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="admin_dashboard.php" class="text-center">Back to Home</a>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container mt-4">
             <div class="row">
                 <div class="col">
                     <h3 class="text-center text-danger">Appoinments</h3>
@@ -60,19 +131,19 @@ if(!isset($_SESSION["admin"])) {
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "select * from appoinment order by id desc";
-                                $run = mysqli_query($con, $sql);
-                                $i=1;
-                                foreach ($run as $app) {
-                                echo '<tr><td>'.$i.'</td><td>'.$app["pname"].'</td><td>'.date("d-m-Y",strtotime($app["date"])).'</td><td>'.date("g:iA",strtotime($app["time"])).'</td><td>'.$app["phone"].'</td><td>'.$app["rehab"].'</td><td>'.$app["doctor"].'</td></tr>';
+                            $sql = "select * from appoinment order by id desc";
+                            $run = mysqli_query($con, $sql);
+                            $i = 1;
+                            foreach ($run as $app) {
+                                echo '<tr><td>' . $i . '</td><td>' . $app["pname"] . '</td><td>' . date("d-m-Y", strtotime($app["date"])) . '</td><td>' . date("g:iA", strtotime($app["time"])) . '</td><td>' . $app["phone"] . '</td><td>' . $app["rehab"] . '</td><td>' . $app["doctor"] . '</td></tr>';
                                 $i++;
-                                }
+                            }
                             ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
+        </div> -->
     </main>
     <!-- write code above -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS  dont change -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2021 at 06:02 PM
+-- Generation Time: Apr 09, 2021 at 08:18 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.22
 
@@ -39,7 +39,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `email`, `password`, `name`) VALUES
-(1, 'admin@gmail.com', 'admin', 'admin1');
+(1, 'admin@gmail.com', 'admin', 'admin1'),
+(2, 'subashadm@gmail.com', 'subash', 'subash');
 
 -- --------------------------------------------------------
 
@@ -54,15 +55,17 @@ CREATE TABLE `appoinment` (
   `time` time NOT NULL,
   `phone` bigint(10) NOT NULL,
   `rehab` int(10) NOT NULL DEFAULT 0,
-  `doctor` varchar(25) NOT NULL
+  `doctor` varchar(25) NOT NULL,
+  `mode` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `appoinment`
 --
 
-INSERT INTO `appoinment` (`id`, `pname`, `date`, `time`, `phone`, `rehab`, `doctor`) VALUES
-(1, 'Pooja', '2021-04-23', '11:00:00', 7744558899, 0, 'Subash');
+INSERT INTO `appoinment` (`id`, `pname`, `date`, `time`, `phone`, `rehab`, `doctor`, `mode`) VALUES
+(1, 'Pooja', '2021-04-23', '11:00:00', 7744558899, 0, 'Subash', 'hospital'),
+(2, 'sandya', '2021-04-16', '09:42:00', 7788445599, 1, 'Sanjeev', 'home');
 
 -- --------------------------------------------------------
 
@@ -74,6 +77,7 @@ CREATE TABLE `doctor` (
   `id` int(7) NOT NULL,
   `name` varchar(25) NOT NULL,
   `email` varchar(25) NOT NULL,
+  `mode` varchar(20) NOT NULL,
   `password` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -81,9 +85,10 @@ CREATE TABLE `doctor` (
 -- Dumping data for table `doctor`
 --
 
-INSERT INTO `doctor` (`id`, `name`, `email`, `password`) VALUES
-(1, 'Sanjeev', 'sanjeevmbbs@gmail.com', 'sanjeev'),
-(2, 'Subash', 'subash@gmail.com', 'subash');
+INSERT INTO `doctor` (`id`, `name`, `email`, `mode`, `password`) VALUES
+(1, 'Sanjeev', 'sanjeevmbbs@gmail.com', 'hospital', 'sanjeev'),
+(2, 'Subash', 'subash@gmail.com', 'hospital', 'subash'),
+(3, 'Manoj', 'manoj@gmail.com', 'home', '1234');
 
 --
 -- Indexes for dumped tables
@@ -116,19 +121,19 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `appoinment`
 --
 ALTER TABLE `appoinment`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

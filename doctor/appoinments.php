@@ -1,24 +1,18 @@
-<?php
-session_start();
-include_once("../config.php");
-if(!isset($_SESSION["admin"])) {
-    header("Location:index.html");
-}
-?>
-<!DOCTYPE html>
+<?php session_start(); ?>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appoinments</title>
+    <!-- Bootstrap CSS dont change -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Dashboard</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 
 <body>
+    <!-- Write code below -->
+    <!-- header start -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
             <a class="navbar-brand" href="#"><img src="../assets/physio.jpg" alt="logo" width="35" height="35" border="1" style="left: 0" class="img-circle" /></a>
@@ -30,9 +24,10 @@ if(!isset($_SESSION["admin"])) {
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?php echo $_SESSION["admin"]; ?>
+                            <?php echo $_SESSION["doctor"]; ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right text-right rounded-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Change Password</a>
                             <a class="dropdown-item" href="main/logout.php">Logout</a>
                         </div>
                     </li>
@@ -40,33 +35,43 @@ if(!isset($_SESSION["admin"])) {
             </div>
         </nav>
     </header>
+    <!-- header ends -->
     <main>
-        <div class="container mt-4">
+        <div class="container">
             <div class="row">
                 <div class="col">
-                    <h3 class="text-center text-danger">Doctors</h3>
+                    <h3 class="text-center text-danger">My Appoinments</h3>
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>S.No</th>
-                                <th>Doctor Name</th>
-                                <th>Email</th>
-                                <th>Mode</th>
+                                <th>Patient Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Phone</th>
+                                <th>Rehabitalization</th>
+                                <th>Doctor</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "select * from doctor";
-                                $run = mysqli_query($con, $sql);
-                                $i=1;
-                                foreach ($run as $doc) {
-                                echo '<tr><td>'.$i.'</td><td>'.$doc["name"].'</td><td>'.$doc["email"].'</td><td>'.$doc["mode"].'</td></tr>';
-                                $i++;
-                                }
+                            include_once("../config.php");
+                            $sq=mysqli_query($con, "select * from doctor where email='".$_SESSION["doctor"]."'");
+                            while($row=mysqli_fetch_assoc($sq)){
+                                $name=$row["name"];
+                            }
+                            $sql = "select * from appoinment where doctor='".$name."' order by id desc";
+                            $run = mysqli_query($con, $sql);
+                            $f = 1;
+                            foreach ($run as $app) {
+                                $rehab = $app["rehab"] == 0 ? "Yes" : "No";
+                                echo '<tr><td>' . $f . '</td><td>' . $app["pname"] . '</td><td>' . date("d-m-Y", strtotime($app["date"])) . '</td><td>' . date("g:iA", strtotime($app["time"])) . '</td><td>' . $app["phone"] . '</td><td>' . $rehab . '</td><td>' . $app["doctor"] . '</td></tr>';
+                                $f++;
+                            }
                             ?>
                         </tbody>
                     </table>
-                    <a href="admin_dashboard.php" class="text-center">Back to Home</a>
+                    <a href="doctor_dashboard.php" class="text-center">Back to Home</a>
                 </div>
             </div>
         </div>

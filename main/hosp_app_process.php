@@ -8,11 +8,12 @@ if(isset($_POST["fix"])){
     $pphone=$_POST["pphone"];
     $rehab=$_POST["rehab"];
     $doctor=$_POST["doctor"];
+    $mode="hospital";
 
-    $sql="insert into appoinment (pname, date, time, phone, rehab, doctor) values ('$pname', '$adate', '$atime', '$pphone', '$rehab', '$doctor')";
+    $sql="insert into appoinment (pname, date, time, phone, rehab, doctor, mode) values ('$pname', '$adate', '$atime', '$pphone', '$rehab', '$doctor', '$mode')";
     $run=mysqli_query($con,$sql);
     if($run){
-        header("Location:../appoinment.php?success");
+        header("Location:../appoinment.php?hospapp=success");
     }
 }
 ?>
